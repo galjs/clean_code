@@ -3,17 +3,16 @@ class Cell():
         self.blocked = True
         self.edge = False
        
-
     def set_blocked(self, is_blocked):
         self.blocked = is_blocked
 
     def set_edge(self, is_edge):
         self.edge = is_edge
     
-    def get_edge(self):
+    def is_edge(self):
         return self.edge
 
-    def get_blocked(self):
+    def is_blocked(self):
         return self.blocked
 
     def get_cell_representation(self):

@@ -1,11 +1,11 @@
 from maze import Maze
 
 def main():
-    
+    # 1 = wall. 0 = empty
     state = ("11111"
-    "00101"
+    "10101"
     "10001"
-    "11101")
+    "11111")
 
     board = Maze(5, state)
     
