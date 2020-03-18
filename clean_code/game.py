@@ -2,13 +2,12 @@ from maze import Maze
 
 def main():
     
-    state = [True, False, True, 
-             True, True, True, 
-             True, True, True, 
-             False, False, False,
-             False, True, False]
+    state = ("11111"
+    "00101"
+    "10001"
+    "11101")
 
-    board = Maze(3, 5, state)
+    board = Maze(5, state)
     
     board.print_maze_representation()
 
