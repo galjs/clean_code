@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>cc98adc6-ef14-4c53-bff9-8c40208959da</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>clean_code.py</StartupFile>
+    <StartupFile>game.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="clean_code.py" />
+    <Compile Include="cell.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game.py" />
     <Compile Include="maze.py">
       <SubType>Code</SubType>
     </Compile>
