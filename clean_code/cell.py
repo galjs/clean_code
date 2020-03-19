@@ -8,7 +8,7 @@ class Cell():
             return 'X'
         if self.mark is not None:
             return self.mark
-        return '+'
+        return ' '
 
     def set_mark(self, mark):
         self.mark = mark

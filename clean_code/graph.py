@@ -52,13 +52,13 @@ class Graph():
             for node in row:
                 if node is not None:
                     if node.is_start():
-                        display += 's'
+                        display += " " + str(node.get_reference_number()) + " "
                     elif node.is_finish():
-                        display += 'f'
+                        display += " " + str(node.get_reference_number()) + " "
                     else:
-                        display += '+'
+                        display += " " + str(node.get_reference_number()) + " "
                 else:
-                    display += ' '
+                    display += '   '
             display += '\n'
         return display
 
@@ -77,6 +77,7 @@ class Graph():
                 if node is not None:
                     if node.get_position() == self.start:
                         node.set_is_start(True)
+                        return
 
     def set_finish(self):
         for row in self.graph:
@@ -84,6 +85,7 @@ class Graph():
                 if node is not None:
                     if node.get_position() == self.finish:
                         node.set_is_finish(True)
+                        return
 
 
 
