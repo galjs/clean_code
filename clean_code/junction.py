@@ -56,8 +56,8 @@ class Junction():
     def has_right(self):
         return self.right is not None
 
-    def set_to_discovered(self):
-        self.visited = True
+    def set_is_discovered(self, is_discovered):
+        self.discovered = is_discovered
 
     def set_is_finish(self, is_finish):
         self.finish = is_finish
