@@ -13,11 +13,13 @@ class BoardIntegrityError(Exception):
 
 
 class Maze():
-    def __init__(self, cells_per_row, cell_desired_state):
+    def __init__(self, cells_per_row, cell_desired_state, start, finish):
         self.board = []
         self.columns = cells_per_row
         self.rows = int(len(cell_desired_state) / self.columns)
         self.cell_desired_state = cell_desired_state
+        self.start = start
+        self.finish = finish
 
         self.create_board_cells()
         self.is_maze_legal()
@@ -63,7 +65,7 @@ class Maze():
                 return False
         return True
 
-    def to_junction_graph(self, start_position):
+    def to_junction_graph(self):
         for row_num in range(self.rows):
             for column_num in range(self.columns):
                 current_postion = Position(row_num, column_num)
@@ -73,6 +75,8 @@ class Maze():
     def is_junction(self, position):
         if self.board[position.get_row()][position.get_column()].is_blocked():
             return False
+        if position == self.start or position == self.finish:
+            return True
 
 
 
