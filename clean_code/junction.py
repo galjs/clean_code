@@ -1,17 +1,17 @@
-from connection import Connection
+from position import Position
+
 
 class Junction():
-    def __init__(self, up, down, left, right):
-        self.up = up
-        self.down = down
-        self.left = left
-        self.right = right
 
-    def __init__(self):
+    def __init__(self, row, column):
         self.up = None
         self.down = None
         self.left = None
         self.right = None
+        self.position = Position(row, column)
+
+    def get_position(self):
+        return Position(self.position)
 
     def get_up(self):
         return self.up
@@ -25,6 +25,7 @@ class Junction():
     def get_right(self):
         return self.right
 
+
     def set_up(self, up):
         self.up = up
 
@@ -36,6 +37,9 @@ class Junction():
 
     def set_right(self, right):
         self.right = right
+
+    def set_postion(self, position):
+        self.position = Position(position)
 
     def has_up(self):
         return self.up is not None

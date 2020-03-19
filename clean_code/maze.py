@@ -13,13 +13,11 @@ class BoardIntegrityError(Exception):
 
 
 class Maze():
-    def __init__(self, cells_per_row, cell_desired_state, start, finish):
+    def __init__(self, cells_per_row, cell_desired_state):
         self.board = []
         self.columns = cells_per_row
         self.rows = int(len(cell_desired_state) / self.columns)
         self.cell_desired_state = cell_desired_state
-        self.start = start
-        self.finish = finish
 
         self.create_board_cells()
         self.is_maze_legal()

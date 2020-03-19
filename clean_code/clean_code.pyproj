@@ -31,7 +31,7 @@
     <Compile Include="maze.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="connection.py">
+    <Compile Include="graph.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="position.py">

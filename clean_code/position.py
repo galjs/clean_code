@@ -4,6 +4,10 @@ class Position():
         self.row = row
         self.column = column
 
+    def __init__(self, position):
+        self.row = position.get_row()
+        self.column = position.get_column()
+
     def get_row(self):
         return self.row
 
