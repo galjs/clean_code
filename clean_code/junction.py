@@ -10,6 +10,8 @@ class Junction():
         self.right = None
         self.position = position
         self.discovered = False
+        self.finish = False
+        self.start = False
 
     def get_position(self):
         return Position(self.position.get_row(), self.position.get_column())
@@ -56,6 +58,18 @@ class Junction():
 
     def set_to_discovered(self):
         self.visited = True
+
+    def set_is_finish(self, is_finish):
+        self.finish = is_finish
+
+    def set_is_start(self, is_start):
+        self.start = is_start
+
+    def is_start(self):
+        return self.start
+
+    def is_finish(self):
+        return self.finish
 
     def is_discovered(self):
         return self.discovered

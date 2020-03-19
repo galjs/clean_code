@@ -4,6 +4,14 @@ class Position():
         self.row = row
         self.column = column
 
+    def __str__(self):
+        return "[{0}, {1}]".format(self.row, self.column)
+
+    def __eq__(self, position):
+        if self.row == position.row and self.column == position.column:
+            return True
+        return False
+
     def get_row(self):
         return self.row
 

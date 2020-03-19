@@ -9,6 +9,9 @@ class Graph():
         self.graph = []
 
         self.create_graph()
+        
+        self.set_start()
+        self.set_finish()
 
     def create_graph(self):
         for row in range(self.maze.get_rows()):
@@ -22,10 +25,11 @@ class Graph():
                     self.update_junctions(current_junction)
 
 
+
     def update_junctions(self, current_junction):
         position = current_junction.get_position()
 
-        upper_junction = self.get_junction_relative_to_position(position, 1, 0)
+        upper_junction = self.get_junction_relative_to_position(position, -1, 0)
         left_junction = self.get_junction_relative_to_position(position, 0, -1)
 
         if upper_junction is not None:
@@ -47,11 +51,40 @@ class Graph():
         for row in self.graph:
             for node in row:
                 if node is not None:
-                    display += '+'
+                    if node.is_start():
+                        display += 's'
+                    elif node.is_finish():
+                        display += 'f'
+                    else:
+                        display += '+'
                 else:
                     display += ' '
             display += '\n'
         return display
+
+    def get_graph(self):
+        return self.graph
+
+    def get_start(self):
+        return self.start
+
+    def get_finish(self):
+        return self.finish
+
+    def set_start(self):
+        for row in self.graph:
+            for node in row:
+                if node is not None:
+                    if node.get_position() == self.start:
+                        node.set_is_start(True)
+
+    def set_finish(self):
+        for row in self.graph:
+            for node in row:
+                if node is not None:
+                    if node.get_position() == self.finish:
+                        node.set_is_finish(True)
+
 
 
 
