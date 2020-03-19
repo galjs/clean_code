@@ -25,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="game.py" />
+    <Compile Include="graph.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="junction.py">
       <SubType>Code</SubType>
     </Compile>
