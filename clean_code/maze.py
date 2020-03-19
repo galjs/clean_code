@@ -1,4 +1,5 @@
 from cell import Cell
+from position import Position
 
 class BoardIntegrityError(Exception):
     def __init__(self, *args):
@@ -21,7 +22,12 @@ class Maze():
         self.create_board_cells()
         self.is_maze_legal()
 
-
+    def __str__(self):
+        for row in self.board:
+            for cell in row:
+                print(cell, end='')
+            print()
+        return ""
 
     def create_board_cells(self):
         cell_index = 0
@@ -57,10 +63,22 @@ class Maze():
                 return False
         return True
 
-    def __str__(self):
-        for row in self.board:
-            for cell in row:
-                print(cell, end='')
-            print()
-        return ""
-        
+    def to_junction_graph(self, start_position):
+        for row_num in range(self.rows):
+            for column_num in range(self.columns):
+                current_postion = Position(row_num, column_num)
+                if self.is_junction(current_postion):
+                    pass
+
+    def is_junction(self, position):
+        if self.board[position.get_row()][position.get_column()].is_blocked():
+            return False
+
+
+
+    def get_surrounding_cells_state(Position):
+
+
+    def get_cell_at_position(self, position):
+        return self.board[position.get_row()][position.get_column()]    
+

@@ -1,4 +1,5 @@
 from maze import Maze
+from position import Position
 
 def main():
     # 1 = wall. 0 = empty
