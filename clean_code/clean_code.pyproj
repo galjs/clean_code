@@ -37,6 +37,9 @@
     <Compile Include="graph.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="missing_number.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="position.py">
       <SubType>Code</SubType>
     </Compile>
