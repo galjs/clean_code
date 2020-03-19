@@ -9,6 +9,7 @@ class Junction():
         self.left = None
         self.right = None
         self.position = position
+        self.discovered = False
 
     def get_position(self):
         return Position(self.position.get_row(), self.position.get_column())
@@ -53,3 +54,8 @@ class Junction():
     def has_right(self):
         return self.right is not None
 
+    def set_to_discovered(self):
+        self.visited = True
+
+    def is_discovered(self):
+        return self.discovered
