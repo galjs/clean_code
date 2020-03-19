@@ -1,3 +1,4 @@
+from maze import BoardIntegrityError
 
 
 class BFS_search():
@@ -10,7 +11,10 @@ class BFS_search():
     def best_route_in_positions(self):
         self.map_best_route()
         best_route = self.create_best_route()
-        return self.convert_junctions_to_positions(best_route)
+        positions = self.convert_junctions_to_positions(best_route)
+        if len(positions) == 0:
+            raise BoardIntegrityError("no solution!")
+        return positions
     
     def get_finish_junction(self):
         finish = self.graph.get_finish()
@@ -31,6 +35,7 @@ class BFS_search():
             neighbours = self.get_neighbours(self.temp)
             for neighbour in neighbours:
                 if neighbour.is_finish():
+                    neighbour.set_is_discovered(True)
                     return
 
                 if not neighbour.is_discovered():
@@ -56,14 +61,16 @@ class BFS_search():
         return neighbours
 
     def create_best_route(self):
-        current_junction = self.finish_junction
         best_route = []
-        best_route.append(current_junction)
+        if self.finish_junction.is_discovered():
+            current_junction = self.finish_junction
+        
+            best_route.append(current_junction)
 
-        while not current_junction.is_start():
-            next_junction = self.get_smallest_refernce_number_neighbour(current_junction)
-            best_route.append(next_junction)
-            current_junction = next_junction
+            while not current_junction.is_start():
+                next_junction = self.get_smallest_refernce_number_neighbour(current_junction)
+                best_route.append(next_junction)
+                current_junction = next_junction
 
         return best_route
 
