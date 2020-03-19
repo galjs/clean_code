@@ -65,23 +65,33 @@ class Maze():
                 return False
         return True
 
-    def to_junction_graph(self):
-        for row_num in range(self.rows):
-            for column_num in range(self.columns):
-                current_postion = Position(row_num, column_num)
-                if self.is_junction(current_postion):
-                    pass
-
-    def is_junction(self, position):
-        if self.board[position.get_row()][position.get_column()].is_blocked():
+    def has_up(self, position):
+        try:
+            return not self.board[position.get_row()+1][position.get_column()].is_blocked()
+        except:
+            # when trying to check non-existing cell
             return False
-        if position == self.start or position == self.finish:
-            return True
 
+    def has_down(self, position):
+        try:
+            return not self.board[position.get_row()-1][position.get_column()].is_blocked()
+        except:
+            # when trying to check non-existing cell
+            return False
 
+    def has_left(self, position):
+        try:
+            return not self.board[position.get_row()][position.get_column()-1].is_blocked()
+        except:
+            # when trying to check non-existing cell
+            return False
 
-    def get_surrounding_cells_state(Position):
-
+    def has_right(self, position):
+        try:
+            return not self.board[position.get_row()][position.get_column()+1].is_blocked()
+        except:
+            # when trying to check non-existing cell
+            return False
 
     def get_cell_at_position(self, position):
         return self.board[position.get_row()][position.get_column()]    
