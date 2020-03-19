@@ -3,15 +3,15 @@ from position import Position
 
 class Junction():
 
-    def __init__(self, row, column):
+    def __init__(self, position):
         self.up = None
         self.down = None
         self.left = None
         self.right = None
-        self.position = Position(row, column)
+        self.position = position
 
     def get_position(self):
-        return Position(self.position)
+        return Position(self.position.get_row(), self.position.get_column())
 
     def get_up(self):
         return self.up
@@ -39,7 +39,7 @@ class Junction():
         self.right = right
 
     def set_postion(self, position):
-        self.position = Position(position)
+        self.position = Position(position.get_row(), position.get_column())
 
     def has_up(self):
         return self.up is not None

@@ -29,6 +29,15 @@ class Maze():
             print()
         return ""
 
+    def get_rows(self):
+        return self.rows
+
+    def get_columns(self):
+        return self.columns
+
+    def get_board(self):
+        return self.board
+
     def create_board_cells(self):
         cell_index = 0
         for row in range(self.rows):
