@@ -4,7 +4,7 @@ from graph import Graph
 from bfs_maze import BFS_search
 
 def main():
-    # 1 = wall. 0 = empty
+    # 1 = wall, 0 = empty
     state = ("1111111111"
     "1010001001"
     "1000100101"
