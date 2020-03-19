@@ -2,7 +2,12 @@ class Cell():
     def __init__(self):
         self.blocked = True
         self.edge = False
-       
+    
+    def __str__(self):
+        if self.blocked:
+            return 'X'
+        return '+'
+
     def set_blocked(self, is_blocked):
         self.blocked = is_blocked
 
@@ -15,10 +20,6 @@ class Cell():
     def is_blocked(self):
         return self.blocked
 
-    def get_cell_representation(self):
-        if self.blocked:
-            return 'X'
-        return ' '
 
 
 

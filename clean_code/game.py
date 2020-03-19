@@ -2,14 +2,14 @@ from maze import Maze
 
 def main():
     # 1 = wall. 0 = empty
-    state = ("11111"
-    "10101"
-    "10001"
-    "11111")
+    state = ("11111111"
+    "10100011"
+    "10001001"
+    "11111111")
 
-    board = Maze(5, state)
+    board = Maze(8, state)
     
-    board.print_maze_representation()
+    print(board)
 
 if __name__ == "__main__":
     main()

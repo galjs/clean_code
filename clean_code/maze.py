@@ -57,12 +57,10 @@ class Maze():
                 return False
         return True
 
-    def print_maze_representation(self):
-        row_content = ""
+    def __str__(self):
         for row in self.board:
             for cell in row:
-                row_content += cell.get_cell_representation()
-
-            print(row_content)
-            row_content = ""
+                print(cell, end='')
+            print()
+        return ""
         
