@@ -3,6 +3,8 @@ from position import Position
 from graph import Graph
 from bfs_maze import BFS_search
 
+# changes branch
+
 def main():
     # 1 = wall. 0 = empty
     state = ("1111111111"
