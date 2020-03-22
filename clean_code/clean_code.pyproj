@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>cc98adc6-ef14-4c53-bff9-8c40208959da</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_maze.py</StartupFile>
+    <StartupFile>algorithms.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

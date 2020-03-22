@@ -1,5 +1,6 @@
 from random import choice, randint, shuffle
 from string import digits
+from time import time
 
 
 class Algorithms():
@@ -18,13 +19,25 @@ class Algorithms():
     def permutations(self, base_string):
         pass
 
-    def delete_multiples_in_string(self, base_string):
+    def print_trimmed_string(self, base_string):
+        trimmed_string = ""
         for index in range(len(base_string)):
-            while index < len(base_string) - 1 and base_string[index] == base_string[index+1]:
-                base_string = base_string[:index+1] + base_string[index + 2:]
+            if len(trimmed_string) == 0 or base_string[index] != trimmed_string[len(trimmed_string) - 1]:
+                trimmed_string += base_string[index]
 
-        print(base_string)
-
+        print(trimmed_string)
 
     def run_algorithms(self):
-        self.delete_multiples_in_string("aaabaaccd")
+        random_string = self.random_string_of_size(10000000)
+        starting_time = time()
+        self.print_trimmed_string(random_string)
+        time_ellapsed = time() - starting_time
+        print(time_ellapsed)
+
+def main():
+    tester = Algorithms()
+    tester.run_algorithms()
+
+
+if __name__ == "__main__":
+    main()
