@@ -42,10 +42,6 @@ class Graph():
             left_junction.add_connection(current_junction)
 
     def _get_junction_relative_to_position(self, position, row_offset, column_offset):
-        #try:
-        #    return self._graph[position.get_row()+row_offset][position.get_column()+column_offset]
-        #except IndexError:
-        #    return None
         row = position.get_row()+row_offset
         column = position.get_column()+column_offset
         desired_position = Position(row, column)
@@ -73,14 +69,14 @@ class Graph():
 
     def _set_start(self):
         for index in range(len(self._graph)):
-            if self._graph[index].get_position() == self._start:
+            if self._graph[index].get_position() == self._start_position:
                 self._graph[index].set_is_start()
                 self._start_junction_index = index
                 return
 
     def _set_finish(self):
         for index in range(len(self._graph)):
-            if self._graph[index].get_position() == self._finish:
+            if self._graph[index].get_position() == self._finish_position:
                 self._graph[index].set_is_finish()
                 self._finish_junction_index = index
                 return
