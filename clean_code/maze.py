@@ -1,6 +1,9 @@
 from cell import Cell
 from position import Position
 
+
+WALL = '1'
+
 class BoardIntegrityError(Exception):
     def __init__(self, *args):
         if args:
@@ -44,10 +47,9 @@ class Maze():
             self.board.append([])
             for column in range(self.columns):
                 current_cell = Cell()
-                if self.cell_desired_state[cell_index] == "1":
-                    current_cell.set_blocked(True)
-                else:
-                    current_cell.set_blocked(False)
+                if self.cell_desired_state[cell_index] == WALL:
+                    current_cell.set_blocked()
+
                 cell_index += 1
                 self.board[row].append(current_cell)
     
@@ -103,4 +105,8 @@ class Maze():
 
     def get_cell_at_position(self, position):
         return self.board[position.get_row()][position.get_column()]    
+
+    def mark_cells_at_positions(self, positions):
+        for position in positions:
+            self.board[position.get_row()][position.get_column()].set_mark("+")
 

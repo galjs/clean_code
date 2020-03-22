@@ -1,6 +1,6 @@
 class Cell():
     def __init__(self):
-        self.blocked = True
+        self.blocked = False
         self.mark = None
     
     def __str__(self):
@@ -13,8 +13,8 @@ class Cell():
     def set_mark(self, mark):
         self.mark = mark
 
-    def set_blocked(self, is_blocked):
-        self.blocked = is_blocked
+    def set_blocked(self):
+        self.blocked = True
 
     def is_blocked(self):
         return self.blocked

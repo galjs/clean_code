@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>cc98adc6-ef14-4c53-bff9-8c40208959da</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>game.py</StartupFile>
+    <StartupFile>test_maze.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -30,7 +30,7 @@
     <Compile Include="cell.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="game.py" />
+    <Compile Include="test_maze.py" />
     <Compile Include="junction.py">
       <SubType>Code</SubType>
     </Compile>

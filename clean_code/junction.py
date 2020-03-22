@@ -1,6 +1,5 @@
 from position import Position
 
-
 class Junction():
     global_refernce = 0
 
