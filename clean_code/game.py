@@ -9,7 +9,7 @@ def main():
     "1010001001"
     "1000100101"
     "1010001011"
-    "1000100101"
+    "1000100001"
     "1111111111")
 
     maze = Maze(10, state)
@@ -23,8 +23,5 @@ def main():
     print(maze)
     print("number of steps needed: ", len(positions), "\n")
     
-
-
-
 if __name__ == "__main__":
     main()

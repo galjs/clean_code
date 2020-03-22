@@ -60,6 +60,7 @@ class Maze():
         if not (first_row is True and last_row is True and left_column is True and right_column is True):
             raise BoardIntegrityError("not all borders are blocked")
 
+
     def check_row_consistancy(self, row, desired_state):
         for cell in self.board[row]:
             if not cell.is_blocked() == desired_state:

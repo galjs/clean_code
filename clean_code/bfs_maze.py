@@ -4,9 +4,8 @@ from maze import BoardIntegrityError
 class BFS_search():
     def __init__(self, graph):
         self.graph = graph
-        self.finish_junction = self.get_finish_junction()
-        self.start_junction = self.get_start_junction()    
-        self.temp = self.start_junction
+        self.finish_junction = self.graph.get_finish_junction()
+        self.start_junction = self.graph.get_start_junction()
 
     def best_route_in_positions(self):
         self.map_best_route()
@@ -15,24 +14,17 @@ class BFS_search():
         if len(positions) == 0:
             raise BoardIntegrityError("no solution!")
         return positions
-    
-    def get_finish_junction(self):
-        finish = self.graph.get_finish()
-        return self.graph.get_graph()[finish.get_row()][finish.get_column()]
-
-    def get_start_junction(self):
-        start = self.graph.get_start()
-        return self.graph.get_graph()[start.get_row()][start.get_column()]
 
     def map_best_route(self):
         nodes = []
-        nodes.append(self.temp)
-        self.temp.set_is_discovered(True)
+        current_junction = self.start_junction
+        nodes.append(current_junction)
+        current_junction.set_is_discovered(True)
         while not len(nodes) == 0:
-            self.temp = nodes[0]
+            current_junction = nodes[0]
             del nodes[0]
 
-            neighbours = self.get_neighbours(self.temp)
+            neighbours = self.get_neighbours(current_junction)
             for neighbour in neighbours:
                 if neighbour.is_finish():
                     neighbour.set_is_discovered(True)

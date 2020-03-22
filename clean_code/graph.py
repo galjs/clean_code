@@ -87,6 +87,11 @@ class Graph():
                         node.set_is_finish(True)
                         return
 
+    def get_finish_junction(self):
+        return self.graph[self.finish.get_row()][self.finish.get_column()]
+
+    def get_start_junction(self):
+        return self.graph[self.start.get_row()][self.start.get_column()]
 
 
 
