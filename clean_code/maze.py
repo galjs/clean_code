@@ -1,112 +1,74 @@
 from cell import Cell
 from position import Position
-
+from exceptions import BoardIntegrityError
 
 WALL = '1'
 
-class BoardIntegrityError(Exception):
-    def __init__(self, *args):
-        if args:
-            self.message = args[0]
-        else:
-            self.message = None
-
-    def __str__(self):
-        return self.message
-
 
 class Maze():
-    def __init__(self, cells_per_row, cell_desired_state):
-        self.board = []
-        self.columns = cells_per_row
-        self.rows = int(len(cell_desired_state) / self.columns)
-        self.cell_desired_state = cell_desired_state
+    """user-printable maze (walls and paths).
+       converts user input into a maze"""
+    def __init__(self, cells_per_row, maze_raw_form):
+        self._board = []
+        self._columns = cells_per_row
+        self._rows = int(len(maze_raw_form) / self._columns)
+        self._maze_raw_form = maze_raw_form
 
-        self.create_board_cells()
-        self.is_maze_legal()
+        self._create_board_cells()
+        self._validate_maze_is_legal()
 
     def __str__(self):
-        for row in self.board:
+        display = ""
+        for row in self._board:
             for cell in row:
-                print(cell, end='')
-            print()
-        return ""
+                display += str(cell)
+            display += "\n"
+        return display
 
     def get_rows(self):
-        return self.rows
+        return self._rows
 
     def get_columns(self):
-        return self.columns
+        return self._columns
 
     def get_board(self):
-        return self.board
+        return self._board
 
-    def create_board_cells(self):
+    def _create_board_cells(self):
         cell_index = 0
-        for row in range(self.rows):
-            self.board.append([])
-            for column in range(self.columns):
+        for row in range(self._rows):
+            self._board.append([])
+            for _ in range(self._columns):
                 current_cell = Cell()
-                if self.cell_desired_state[cell_index] == WALL:
+                if self._maze_raw_form[cell_index] == WALL:
                     current_cell.set_blocked()
 
                 cell_index += 1
-                self.board[row].append(current_cell)
+                self._board[row].append(current_cell)
     
-    def is_maze_legal(self):
-        first_row = self.check_row_consistancy(0, True)
-        last_row = self.check_row_consistancy(len(self.board) - 1, True)
-        left_column = self.check_column_consistancy(0, True)
-        right_column = self.check_column_consistancy(len(self.board[0]) - 1, True)
+    def _validate_maze_is_legal(self):
+        first_row = self._check_row_consistancy(0, True)
+        last_row = self._check_row_consistancy(len(self._board) - 1, True)
+        left_column = self._check_column_consistancy(0, True)
+        right_column = self._check_column_consistancy(len(self._board[0]) - 1, True)
 
-        if not (first_row is True and last_row is True and left_column is True and right_column is True):
+        if not(first_row and last_row and left_column and right_column):
             raise BoardIntegrityError("not all borders are blocked")
 
 
-    def check_row_consistancy(self, row, desired_state):
-        for cell in self.board[row]:
+    def _check_row_consistancy(self, row, desired_state):
+        for cell in self._board[row]:
             if not cell.is_blocked() == desired_state:
                 return False
         return True
 
-    def check_column_consistancy(self, column, desired_state):
-        for row in self.board:
+    def _check_column_consistancy(self, column, desired_state):
+        for row in self._board:
             if not row[column].is_blocked() == desired_state:
                 return False
         return True
 
-    def has_up(self, position):
-        try:
-            return not self.board[position.get_row()+1][position.get_column()].is_blocked()
-        except:
-            # when trying to check non-existing cell
-            return False
-
-    def has_down(self, position):
-        try:
-            return not self.board[position.get_row()-1][position.get_column()].is_blocked()
-        except:
-            # when trying to check non-existing cell
-            return False
-
-    def has_left(self, position):
-        try:
-            return not self.board[position.get_row()][position.get_column()-1].is_blocked()
-        except:
-            # when trying to check non-existing cell
-            return False
-
-    def has_right(self, position):
-        try:
-            return not self.board[position.get_row()][position.get_column()+1].is_blocked()
-        except:
-            # when trying to check non-existing cell
-            return False
-
-    def get_cell_at_position(self, position):
-        return self.board[position.get_row()][position.get_column()]    
-
     def mark_cells_at_positions(self, positions):
         for position in positions:
-            self.board[position.get_row()][position.get_column()].set_mark("+")
+            self._board[position.get_row()][position.get_column()].set_mark("+")
 

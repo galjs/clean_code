@@ -30,6 +30,9 @@
     <Compile Include="cell.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="exceptions.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_maze.py" />
     <Compile Include="junction.py">
       <SubType>Code</SubType>

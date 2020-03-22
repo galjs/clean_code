@@ -1,23 +1,24 @@
 class Cell():
+    """represents a square in the maze that can be a wall or a path"""
     def __init__(self):
-        self.blocked = False
-        self.mark = None
+        self._blocked = False
+        self._mark = None
     
     def __str__(self):
-        if self.blocked:
+        if self._blocked:
             return 'X'
-        if self.mark is not None:
-            return self.mark
+        if self._mark is not None:
+            return self._mark
         return ' '
 
-    def set_mark(self, mark):
-        self.mark = mark
+    def set_mark(self, _mark):
+        self._mark = _mark
 
     def set_blocked(self):
-        self.blocked = True
+        self._blocked = True
 
     def is_blocked(self):
-        return self.blocked
+        return self._blocked
 
 
 
