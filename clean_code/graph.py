@@ -5,8 +5,10 @@ class Graph():
     """stores the junction structure in graph form 
        that a search algorithm can process"""
     def __init__(self, start, finish, maze):
-        self._start = start
-        self._finish = finish
+        self._start_position = start
+        self._finish_position = finish
+        self._start_junction_index = None
+        self._finish_junction_index = None
         self._maze = maze
         self._graph = []
 
@@ -17,13 +19,10 @@ class Graph():
 
     def _create_graph(self):
         for row in range(self._maze.get_rows()):
-            self._graph.append([])
             for column in range(self._maze.get_columns()):
-                if self._maze.get_board()[row][column].is_blocked():
-                    self._graph[row].append(None)
-                else:
+                if not self._maze.get_board()[row][column].is_blocked():
                     current_junction = Junction(Position(row, column))
-                    self._graph[row].append(current_junction)
+                    self._graph.append(current_junction)
                     self._update_junctions(current_junction)
 
 
@@ -43,10 +42,18 @@ class Graph():
             left_junction.add_connection(current_junction)
 
     def _get_junction_relative_to_position(self, position, row_offset, column_offset):
-        try:
-            return self._graph[position.get_row()+row_offset][position.get_column()+column_offset]
-        except IndexError:
-            return None
+        #try:
+        #    return self._graph[position.get_row()+row_offset][position.get_column()+column_offset]
+        #except IndexError:
+        #    return None
+        row = position.get_row()+row_offset
+        column = position.get_column()+column_offset
+        desired_position = Position(row, column)
+        for junction in self._graph:
+            if junction.get_position() == desired_position:
+                return junction
+        return None
+
 
     def __str__(self):
         display = ""
@@ -65,24 +72,24 @@ class Graph():
         return display
 
     def _set_start(self):
-        for row in self._graph:
-            for node in row:
-                if node is not None and node.get_position() == self._start:
-                    node.set_is_start()
-                    return
+        for index in range(len(self._graph)):
+            if self._graph[index].get_position() == self._start:
+                self._graph[index].set_is_start()
+                self._start_junction_index = index
+                return
 
     def _set_finish(self):
-        for row in self._graph:
-            for node in row:
-                if node is not None and node.get_position() == self._finish:
-                    node.set_is_finish()
-                    return
+        for index in range(len(self._graph)):
+            if self._graph[index].get_position() == self._finish:
+                self._graph[index].set_is_finish()
+                self._finish_junction_index = index
+                return
 
     def get_finish_junction(self):
-        return self._graph[self._finish.get_row()][self._finish.get_column()]
+        return self._graph[self._finish_junction_index]
 
     def get_start_junction(self):
-        return self._graph[self._start.get_row()][self._start.get_column()]
+        return self._graph[self._start_junction_index]
 
     def convert_junctions_to_positions(self, junctions):
         positions = []

@@ -20,12 +20,13 @@ class Algorithms():
         pass
 
     def print_trimmed_string(self, base_string):
-        trimmed_string = ""
-        for index in range(len(base_string)):
-            if len(trimmed_string) == 0 or base_string[index] != trimmed_string[len(trimmed_string) - 1]:
-                trimmed_string += base_string[index]
+        trimmed_string = base_string[0]
+        for index in range(1, len(base_string)):
+            #if base_string[index] != trimmed_string[-1]:
+            #    trimmed_string += base_string[index]
+            pass
 
-        print(trimmed_string)
+        #print(trimmed_string)
 
     def run_algorithms(self):
         random_string = self.random_string_of_size(10000000)
