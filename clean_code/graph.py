@@ -72,14 +72,14 @@ class Graph():
         for row in self.graph:
             for node in row:
                 if node is not None and node.get_position() == self.start:
-                    node.set_is_start(True)
+                    node.set_is_start()
                     return
 
     def set_finish(self):
         for row in self.graph:
             for node in row:
                 if node is not None and node.get_position() == self.finish:
-                    node.set_is_finish(True)
+                    node.set_is_finish()
                     return
 
     def get_finish_junction(self):

@@ -1,7 +1,6 @@
 from position import Position
 
 class Junction():
-    global_refernce = 0
 
     def __init__(self, position):
         self.connections = []
@@ -24,15 +23,16 @@ class Junction():
         self.position = Position(position.get_row(), position.get_column())
 
     def set_is_discovered(self, is_discovered):
-        Junction.global_refernce += 1
-        self.reference_number = Junction.global_refernce
         self.discovered = is_discovered
 
-    def set_is_finish(self, is_finish):
-        self.finish = is_finish
+    def set_is_finish(self):
+        self.finish = True
 
-    def set_is_start(self, is_start):
-        self.start = is_start
+    def set_is_start(self):
+        self.start = True
+
+    def set_reference_number(self, reference_number):
+        self.reference_number = reference_number
 
     def has_connections(self):
         return len(self.connections) > 0
