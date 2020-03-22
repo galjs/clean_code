@@ -43,7 +43,7 @@ class Graph():
     def get_junction_relative_to_position(self, position, row_offset, column_offset):
         try:
             return self.graph[position.get_row()+row_offset][position.get_column()+column_offset]
-        except:
+        except IndexError:
             return None
 
     def __str__(self):
@@ -52,18 +52,15 @@ class Graph():
             for node in row:
                 if node is not None:
                     if node.is_start():
-                        display += " " + str(node.get_reference_number()) + " "
+                        display += " s "
                     elif node.is_finish():
-                        display += " " + str(node.get_reference_number()) + " "
+                        display += " f "
                     else:
                         display += " " + str(node.get_reference_number()) + " "
                 else:
                     display += '   '
             display += '\n'
         return display
-
-    def get_graph(self):
-        return self.graph
 
     def get_start(self):
         return self.start
@@ -74,18 +71,16 @@ class Graph():
     def set_start(self):
         for row in self.graph:
             for node in row:
-                if node is not None:
-                    if node.get_position() == self.start:
-                        node.set_is_start(True)
-                        return
+                if node is not None and node.get_position() == self.start:
+                    node.set_is_start(True)
+                    return
 
     def set_finish(self):
         for row in self.graph:
             for node in row:
-                if node is not None:
-                    if node.get_position() == self.finish:
-                        node.set_is_finish(True)
-                        return
+                if node is not None and node.get_position() == self.finish:
+                    node.set_is_finish(True)
+                    return
 
     def get_finish_junction(self):
         return self.graph[self.finish.get_row()][self.finish.get_column()]
