@@ -33,12 +33,12 @@ class Graph():
         left_junction = self.get_junction_relative_to_position(position, 0, -1)
 
         if upper_junction is not None:
-            current_junction.set_up(upper_junction)
-            upper_junction.set_down(current_junction)
+            current_junction.add_connection(upper_junction)
+            upper_junction.add_connection(current_junction)
 
         if left_junction is not None:
-            current_junction.set_left(left_junction)
-            left_junction.set_right(current_junction)
+            current_junction.add_connection(left_junction)
+            left_junction.add_connection(current_junction)
 
     def get_junction_relative_to_position(self, position, row_offset, column_offset):
         try:
@@ -92,6 +92,12 @@ class Graph():
 
     def get_start_junction(self):
         return self.graph[self.start.get_row()][self.start.get_column()]
+
+    def convert_junctions_to_positions(self, junctions):
+        positions = []
+        for junction in junctions:
+            positions.append(junction.get_position())
+        return positions
 
 
 

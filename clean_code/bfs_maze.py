@@ -1,6 +1,7 @@
 from maze import BoardIntegrityError
 
 
+
 class BFS_search():
     def __init__(self, graph):
         self.graph = graph
@@ -10,7 +11,7 @@ class BFS_search():
     def best_route_in_positions(self):
         self.map_best_route()
         best_route = self.create_best_route()
-        positions = self.convert_junctions_to_positions(best_route)
+        positions = self.graph.convert_junctions_to_positions(best_route)
         if len(positions) == 0:
             raise BoardIntegrityError("no solution!")
         return positions
@@ -24,7 +25,7 @@ class BFS_search():
             current_junction = nodes[0]
             del nodes[0]
 
-            neighbours = self.get_neighbours(current_junction)
+            neighbours = current_junction.get_connections()
             for neighbour in neighbours:
                 if neighbour.is_finish():
                     neighbour.set_is_discovered(True)
@@ -33,24 +34,6 @@ class BFS_search():
                 if not neighbour.is_discovered():
                     nodes.append(neighbour)
                     neighbour.set_is_discovered(True)
-            
-    
-    def get_neighbours(self, current_junction):
-        neighbours = []
-
-        if current_junction.has_up():
-            neighbours.append(current_junction.get_up())
-        
-        if current_junction.has_down():
-            neighbours.append(current_junction.get_down())
-
-        if current_junction.has_left():
-            neighbours.append(current_junction.get_left())
-
-        if current_junction.has_right():
-            neighbours.append(current_junction.get_right())
-
-        return neighbours
 
     def create_best_route(self):
         best_route = []
@@ -67,18 +50,14 @@ class BFS_search():
         return best_route
 
     def get_smallest_refernce_number_neighbour(self, current_junction):
-        neighbours = self.get_neighbours(current_junction)
+        neighbours = current_junction.get_connections()
         smallest_reference_neighbour = neighbours[0]
+
         for neighbour in neighbours:
-            if not neighbour.get_reference_number() == -1:
+            if neighbour.is_discovered():
                 if neighbour.get_reference_number() < smallest_reference_neighbour.get_reference_number():
                     smallest_reference_neighbour = neighbour
-                if smallest_reference_neighbour.get_reference_number() == -1:
+                if not smallest_reference_neighbour.is_discovered():
                     smallest_reference_neighbour = neighbour
-        return smallest_reference_neighbour
 
-    def convert_junctions_to_positions(self, junctions):
-        positions = []
-        for junction in junctions:
-            positions.append(junction.get_position())
-        return positions
+        return smallest_reference_neighbour
