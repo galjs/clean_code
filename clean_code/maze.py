@@ -1,5 +1,4 @@
 from cell import Cell
-from position import Position
 from exceptions import BoardIntegrityError
 
 WALL = '1'
@@ -48,9 +47,9 @@ class Maze():
     
     def _validate_maze_is_legal(self):
         first_row = self._check_row_consistancy(0, True)
-        last_row = self._check_row_consistancy(len(self._board) - 1, True)
+        last_row = self._check_row_consistancy(self._rows - 1, True)
         left_column = self._check_column_consistancy(0, True)
-        right_column = self._check_column_consistancy(len(self._board[0]) - 1, True)
+        right_column = self._check_column_consistancy(self._columns - 1, True)
 
         if not(first_row and last_row and left_column and right_column):
             raise BoardIntegrityError("not all borders are blocked")
