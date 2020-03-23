@@ -340,5 +340,5 @@ ASALocalRun/
 healthchecksdb
 
 # visual studio project
-*/clean_code.pyproj
-*/clean_code.sln
+*.pyproj
+*.sln

@@ -2,8 +2,8 @@ from junction import Junction
 from position import Position
 
 class Graph():
-    """stores the junction structure in graph form 
-       that a search algorithm can process"""
+    """Stores the junction structure in graph form 
+       that a search algorithm can process."""
     def __init__(self, start, finish, maze):
         self._start = start
         self._finish = finish

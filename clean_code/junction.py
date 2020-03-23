@@ -1,8 +1,8 @@
 from position import Position
 
 class Junction():
-    """represents a path square in the maze.
-       connected to all the path-squares that are adjacent to it"""
+    """Represents a path square in the maze.
+       connected to all the path-squares that are adjacent to it."""
     def __init__(self, position):
         self._connections = []
         self._position = position

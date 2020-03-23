@@ -1,6 +1,9 @@
 import missing_number
 from random import shuffle, choice
 
+"""Gets a number from the user, creates a list of length Number with the numbers
+   0-Number and then randomly removes a number. then finds which number
+   was removed."""
 
 def get_number_from_user():
     number = input("enter a whole number: ")

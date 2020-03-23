@@ -6,8 +6,8 @@ WALL = '1'
 
 
 class Maze():
-    """user-printable maze (walls and paths).
-       converts user input into a maze"""
+    """User-printable maze (walls and paths).
+       converts user input into a maze."""
     def __init__(self, cells_per_row, maze_raw_form):
         self._board = []
         self._columns = cells_per_row

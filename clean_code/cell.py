@@ -1,5 +1,5 @@
 class Cell():
-    """represents a square in the maze that can be a wall or a path"""
+    """Represents a square in the maze that can be a wall or a path."""
     def __init__(self):
         self._blocked = False
         self._mark = None

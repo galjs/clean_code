@@ -1,6 +1,6 @@
 
 class Position():
-    """x and y index of a node in the maze matrix"""
+    """X and Y index of a node in the maze matrix."""
     def __init__(self, row, column):
         self._row = row
         self._column = column

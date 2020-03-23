@@ -3,7 +3,7 @@ from exceptions import BoardIntegrityError
 
 
 class BFS_search():
-    """implements BFS algorithm to find the shortest path in the maze"""
+    """Implements BFS algorithm to find the shortest path in the maze."""
     def __init__(self, graph):
         self._graph = graph
         self._finish_junction = self._graph.get_finish_junction()
