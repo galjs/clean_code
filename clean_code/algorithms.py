@@ -47,31 +47,52 @@ def print_trimmed_string(base_string):
 
 
 def print_longest_palindrome(base_string):
-    length_of_longest_pali = 0
-    longest_pali_start_position = 0
-    base_index = 0
+    longest_length = 0
+    longest_start = 0
+    odd = True
 
-    while base_index < len(base_string) - length_of_longest_pali:
-        index_of_next_starting_point = len(base_string) - 1
-        while index_of_next_starting_point - base_index >= length_of_longest_pali:
-            if is_palindrome(base_string, base_index, index_of_next_starting_point):
-                length_of_longest_pali = index_of_next_starting_point - base_index
-                longest_pali_start_position = base_index
-                break
-            
-            index_of_next_starting_point -= 1
-        base_index += 1
+    for index in range(len(base_string) - 1):
+        current_length = odd_palindrome_length(base_string, index)
+        if current_length > longest_length:
+            longest_length = current_length
+            longest_start = index
+            odd = True
 
-    print(length_of_longest_pali, longest_pali_start_position, base_string[longest_pali_start_position:longest_pali_start_position+length_of_longest_pali+1])
+        if current_length == 1 and base_string[index] == base_string[index+1]:
+            current_length = even_palindrome_length(base_string, index, index+1)
+            if current_length > longest_length:
+                longest_length = current_length
+                longest_start = index
+                odd = False
+
+    if odd:
+        print(base_string[longest_start-int(longest_length/2):longest_start+int(longest_length / 2)+1])
+    else:
+        print(base_string[longest_start-int(longest_length/2)+1:longest_start+int(longest_length / 2)+1])
 
 
-def is_palindrome(base_string, start_index, end_index):
-    half_way = int((end_index - start_index) / 2) + start_index + 1
-    for index in range(start_index, half_way):
-        if not base_string[index] == base_string[end_index]:
-            return False
-        end_index -= 1
-    return True
+def odd_palindrome_length(base_string, middle):
+    length = 1
+    distance = 1
+    while distance + middle < len(base_string) and middle >= distance:
+        if base_string[middle + distance] == base_string[middle - distance]:
+            length += 2
+            distance += 1
+        else:
+            break
+    return length
+
+
+def even_palindrome_length(base_string, middle_left, middle_right):
+    length = 2
+    distance = 1
+    while distance + middle_right < len(base_string) and middle_left >= distance:
+        if base_string[middle_right + distance] == base_string[middle_left - distance]:
+            length += 2
+            distance += 1
+        else:
+            break
+    return length
 
 
 def run_algorithms():
@@ -87,12 +108,12 @@ def run_algorithms():
     #time_ellapsed = time() - starting_time
     #print("biggest numbers: ",time_ellapsed)
 
-    random_binary_string = random_binary_string_of_size(1000)
+    random_binary_string = random_binary_string_of_size(1000000)
     starting_time = time()
     #"0100100110"
     print_longest_palindrome(random_binary_string)
     time_ellapsed = time() - starting_time
-    print("polindromes: ",time_ellapsed)
+    print("palindromes: ",time_ellapsed)
     
 
 

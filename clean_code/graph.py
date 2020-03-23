@@ -1,6 +1,7 @@
 from junction import Junction
 from position import Position
 
+
 class Graph():
     """Stores the junction structure in graph form 
        that a search algorithm can process."""
@@ -30,7 +31,7 @@ class Graph():
 
 
     def _update_junctions(self):
-        junctions = filter(lambda node: node is not None, [node for row in self._graph for node in row])
+        junctions = filter(None, [node for row in self._graph for node in row])
         for junction in junctions:
             position = junction.get_position()
 
