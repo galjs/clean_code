@@ -1,15 +1,17 @@
 from cell import Cell
 from exceptions import BoardIntegrityError
 from functools import reduce
+from numpy import reshape
 
 
 class Maze():
     """User-printable maze (walls and paths).
        converts user input into a maze."""
 
+    WALL_INDICATOR = '1'
+    PATH_MARK = '+'
+
     def __init__(self, cells_per_row, maze_raw_form):
-        self._wall_indicator= '1'
-        self._path_part = '+'
         self._board = []
         self._columns = cells_per_row
         self._rows = int(len(maze_raw_form) / self._columns)
@@ -37,18 +39,13 @@ class Maze():
 
     def _create_board(self):
         cells = self._create_cells()
-        cell_index = 0
-        for row in range(self._rows):
-            self._board.append([])
-            for _ in range(self._columns):
-                self._board[row].append(cells[cell_index])
-                cell_index += 1
+        self._board = reshape(cells, (self._rows, self._columns))
     
     def _create_cells(self):
         cells = []
         for indicator in self._maze_raw_form:
             current_cell = Cell()
-            if indicator == self._wall_indicator:
+            if indicator == Maze.WALL_INDICATOR:
                 current_cell.set_blocked()
             cells.append(current_cell)
 
@@ -74,5 +71,4 @@ class Maze():
 
     def mark_cells_at_positions(self, positions):
         for position in positions:
-            self._board[position.get_row()][position.get_column()].set_mark(self._path_part)
-
+            self._board[position.get_row()][position.get_column()].set_mark(Maze.PATH_MARK)

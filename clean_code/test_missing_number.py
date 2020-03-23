@@ -6,13 +6,13 @@ from random import shuffle, choice
    was removed."""
 
 def get_number_from_user():
-    number = input("enter a whole number: ")
+    number = input("enter a whole number to be used as generator of a list 0-number: ")
     try:
         number = int(number)
-    except:
-        raise InputError("input must be an integer")
+    except ValueError:
+        raise ValueError("input must be an integer")
     if number < 0:
-        raise InputError("number must be greater or equal to 0")
+        raise ValueError("number must be greater or equal to 0")
 
     return number
 

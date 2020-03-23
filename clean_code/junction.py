@@ -11,6 +11,13 @@ class Junction():
         self._start = False
         self._sequence_number = None
 
+    def __str__(self):
+        if self._finish:
+            return ' f '
+        if self._start:
+            return ' s '
+        return ' ' + str(self._sequence_number) + ' '
+
     def get_position(self):
         return Position(self._position.get_row(), self._position.get_column())
 

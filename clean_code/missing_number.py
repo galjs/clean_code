@@ -1,6 +1,8 @@
 
 """Recieves a list of consecutive numbers when only one is missing.
-   returns the missing number."""
+   returns the missing number by summing-up the 'complete' arithmetic
+   progress and subtracting from it the sum of the given list.
+   the difference is the deleted number"""
 
 def sum_arithmetic_progress(number_of_elements, difference=1, first_element=0):
     total = (number_of_elements * (2 * first_element + difference * (number_of_elements - 1))) / 2
