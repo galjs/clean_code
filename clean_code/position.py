@@ -9,9 +9,7 @@ class Position():
         return "[{0}, {1}]".format(self._row, self._column)
 
     def __eq__(self, position):
-        if self._row == position.get_row() and self._column == position.get_column():
-            return True
-        return False
+        return self._row == position.get_row() and self._column == position.get_column()
 
     def get_row(self):
         return self._row
