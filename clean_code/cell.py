@@ -17,7 +17,3 @@ class Cell():
 
     def is_blocked(self):
         return self._blocked
-
-
-
-
