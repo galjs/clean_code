@@ -7,9 +7,7 @@ class Cell():
     def __str__(self):
         if self._blocked:
             return 'X'
-        if self._mark is not None:
-            return self._mark
-        return ' '
+        return self._mark or ' '
 
     def set_mark(self, _mark):
         self._mark = _mark

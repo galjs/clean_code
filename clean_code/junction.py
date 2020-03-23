@@ -21,19 +21,18 @@ class Junction():
         return self._reference_number
 
     def set_postion(self, position):
-        self._position = Position(position.get_row(), position.get_column())
+        self._position.set_row(position.get_row())
+        self._position.set_column(position.get_column())
 
-    def set_is_discovered(self, is_discovered):
-        self._discovered = is_discovered
+    def set_discovered(self, reference_number):
+        self._discovered = True
+        self._reference_number = reference_number
 
     def set_is_finish(self):
         self._finish = True
 
     def set_is_start(self):
         self._start = True
-
-    def set_reference_number(self, reference_number):
-        self._reference_number = reference_number
 
     def has_connections(self):
         return len(self._connections) > 0

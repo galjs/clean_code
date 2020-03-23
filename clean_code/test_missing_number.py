@@ -1,4 +1,4 @@
-import missing_number
+from missing_number import find_missing_number
 from random import shuffle, choice
 
 """Gets a number from the user, creates a list of length Number with the numbers
@@ -27,7 +27,7 @@ def create_list_with_missing_number(max_value):
 def main():
     chosen_number = get_number_from_user()
     numbers = create_list_with_missing_number(chosen_number)
-    deleted_number = missing_number.find_missing_number(numbers)
+    deleted_number = find_missing_number(numbers)
     print(deleted_number)
 
 if __name__ == "__main__":

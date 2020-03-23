@@ -42,7 +42,7 @@ class Graph():
             current_junction.add_connection(left_junction)
             left_junction.add_connection(current_junction)
 
-    def _get_junction_relative_to_position(self, position, row_offset, column_offset):
+    def _get_junction_relative_to_position(self, position, row_offset=0, column_offset=0):
         try:
             return self._graph[position.get_row()+row_offset][position.get_column()+column_offset]
         except IndexError:
@@ -66,30 +66,22 @@ class Graph():
         return display
 
     def _set_start(self):
-        for row in self._graph:
-            for node in row:
-                if node is not None and node.get_position() == self._start:
-                    node.set_is_start()
-                    return
+        designated_start = self.get_start_junction()
+        designated_start.set_is_start()
 
     def _set_finish(self):
-        for row in self._graph:
-            for node in row:
-                if node is not None and node.get_position() == self._finish:
-                    node.set_is_finish()
-                    return
+        designated_finish = self.get_finish_junction()
+        designated_finish.set_is_finish()
 
     def get_finish_junction(self):
-        return self._graph[self._finish.get_row()][self._finish.get_column()]
+        return self._get_junction_relative_to_position(self._finish)
 
     def get_start_junction(self):
-        return self._graph[self._start.get_row()][self._start.get_column()]
+        return self._get_junction_relative_to_position(self._start)
 
     def convert_junctions_to_positions(self, junctions):
-        positions = []
-        for junction in junctions:
-            positions.append(junction.get_position())
-        return positions
+        return [junction.get_position() for junction in junctions]
+        
 
 
 

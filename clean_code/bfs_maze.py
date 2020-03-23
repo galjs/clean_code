@@ -25,8 +25,7 @@ class BFS_search():
         reference_number = 0
         current_junction = self._start_junction
         nodes.append(current_junction)
-        current_junction.set_is_discovered(True)
-        current_junction.set_reference_number(reference_number)
+        current_junction.set_discovered(reference_number)
         reference_number += 1
         while not len(nodes) == 0:
             current_junction = nodes[0]
@@ -35,15 +34,13 @@ class BFS_search():
             neighbours = current_junction.get_connections()
             for neighbour in neighbours:
                 if neighbour.is_finish():
-                    neighbour.set_is_discovered(True)
-                    neighbour.set_reference_number(reference_number)
+                    neighbour.set_discovered(reference_number)
                     reference_number += 1
                     return
 
                 if not neighbour.is_discovered():
                     nodes.append(neighbour)
-                    neighbour.set_is_discovered(True)
-                    neighbour.set_reference_number(reference_number)
+                    neighbour.set_discovered(reference_number)
                     reference_number += 1
 
     def _create_best_route(self):
