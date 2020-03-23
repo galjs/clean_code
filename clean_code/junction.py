@@ -24,9 +24,9 @@ class Junction():
         self._position.set_row(position.get_row())
         self._position.set_column(position.get_column())
 
-    def set_discovered(self, reference_number):
+    def set_discovered(self, sequence_number):
         self._discovered = True
-        self._sequence_number = reference_number
+        self._sequence_number = sequence_number
 
     def set_is_finish(self):
         self._finish = True

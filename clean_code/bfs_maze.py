@@ -24,11 +24,11 @@ class BFS_search():
         """adds all nodes connected to the current node to a queue.
            repeats the process for every node in the queue 
            until it reaches the desired node (end of maze)"""
-        reference_number = 0
+        sequence_number = 0
         nodes = [self._start_junction]
 
-        self._start_junction.set_discovered(reference_number)
-        reference_number += 1
+        self._start_junction.set_discovered(sequence_number)
+        sequence_number += 1
 
         while not len(nodes) == 0:
             current_junction = nodes[0]
@@ -37,14 +37,14 @@ class BFS_search():
             neighbours = current_junction.get_connections()
             for neighbour in neighbours:
                 if neighbour.is_finish():
-                    neighbour.set_discovered(reference_number)
-                    reference_number += 1
+                    neighbour.set_discovered(sequence_number)
+                    sequence_number += 1
                     return
 
                 if not neighbour.is_discovered():
                     nodes.append(neighbour)
-                    neighbour.set_discovered(reference_number)
-                    reference_number += 1
+                    neighbour.set_discovered(sequence_number)
+                    sequence_number += 1
 
     def _create_best_route(self):
         best_route = []
@@ -61,4 +61,5 @@ class BFS_search():
         return best_route
 
     def _get_smallest_sequence_number_neighbour(self, current_junction):
-        return sorted(filter(lambda connection: not connection.get_sequence_number() == -1, current_junction.get_connections()), key=lambda neighbour: neighbour.get_sequence_number())[0]
+        visited_junctions = filter(lambda connection: not connection.get_sequence_number() == -1, current_junction.get_connections())
+        return min(visited_junctions, key=lambda junction: junction.get_sequence_number())
