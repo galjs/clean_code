@@ -3,7 +3,10 @@ from exceptions import BoardIntegrityError
 
 
 class BFS_search():
-    """Implements BFS algorithm to find the shortest path in the maze."""
+    """Implements BFS algorithm to find the shortest path in the maze.
+        for more inforamtion visit:
+        https://en.wikipedia.org/wiki/Breadth-first_search."""
+
     def __init__(self, graph):
         self._graph = graph
         self._finish_junction = self._graph.get_finish_junction()
@@ -21,12 +24,12 @@ class BFS_search():
         """adds all nodes connected to the current node to a queue.
            repeats the process for every node in the queue 
            until it reaches the desired node (end of maze)"""
-        nodes = []
         reference_number = 0
-        current_junction = self._start_junction
-        nodes.append(current_junction)
-        current_junction.set_discovered(reference_number)
+        nodes = [self._start_junction]
+
+        self._start_junction.set_discovered(reference_number)
         reference_number += 1
+
         while not len(nodes) == 0:
             current_junction = nodes[0]
             del nodes[0]
@@ -51,21 +54,11 @@ class BFS_search():
             best_route.append(current_junction)
 
             while not current_junction.is_start():
-                next_junction = self._get_smallest_refernce_number_neighbour(current_junction)
+                next_junction = self._get_smallest_sequence_number_neighbour(current_junction)
                 best_route.append(next_junction)
                 current_junction = next_junction
 
         return best_route
 
-    def _get_smallest_refernce_number_neighbour(self, current_junction):
-        neighbours = current_junction.get_connections()
-        smallest_reference_neighbour = neighbours[0]
-
-        for neighbour in neighbours:
-            if neighbour.is_discovered():
-                if neighbour.get_reference_number() < smallest_reference_neighbour.get_reference_number():
-                    smallest_reference_neighbour = neighbour
-                if not smallest_reference_neighbour.is_discovered():
-                    smallest_reference_neighbour = neighbour
-
-        return smallest_reference_neighbour
+    def _get_smallest_sequence_number_neighbour(self, current_junction):
+        return sorted(filter(lambda connection: not connection.get_sequence_number() == -1, current_junction.get_connections()), key=lambda neighbour: neighbour.get_sequence_number())[0]

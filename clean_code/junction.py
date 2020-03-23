@@ -9,7 +9,7 @@ class Junction():
         self._discovered = False
         self._finish = False
         self._start = False
-        self._reference_number = None
+        self._sequence_number = None
 
     def get_position(self):
         return Position(self._position.get_row(), self._position.get_column())
@@ -17,8 +17,8 @@ class Junction():
     def get_connections(self):
         return self._connections
 
-    def get_reference_number(self):
-        return self._reference_number
+    def get_sequence_number(self):
+        return self._sequence_number
 
     def set_postion(self, position):
         self._position.set_row(position.get_row())
@@ -26,7 +26,7 @@ class Junction():
 
     def set_discovered(self, reference_number):
         self._discovered = True
-        self._reference_number = reference_number
+        self._sequence_number = reference_number
 
     def set_is_finish(self):
         self._finish = True
