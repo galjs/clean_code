@@ -46,18 +46,53 @@ def print_trimmed_string(base_string):
     return ''.join(base_string[i] for i in range(1, len(base_string)) if base_string[i] != base_string[i-1])
 
 
-def run_algorithms():
-    random_string = random_string_of_size(1000000)
-    starting_time = time()
-    print_trimmed_string(random_string)
-    time_ellapsed = time() - starting_time
-    print("trimmed_string: ", time_ellapsed)
+def print_longest_palindrome(base_string):
+    length_of_longest_pali = 0
+    longest_pali_start_position = 0
+    base_index = 0
 
-    random_numbers = random_int_list_of_size(1000000)
+    while base_index < len(base_string) - length_of_longest_pali:
+        index_of_next_starting_point = len(base_string) - 1
+        while index_of_next_starting_point - base_index >= length_of_longest_pali:
+            if is_palindrome(base_string, base_index, index_of_next_starting_point):
+                length_of_longest_pali = index_of_next_starting_point - base_index
+                longest_pali_start_position = base_index
+                break
+            
+            index_of_next_starting_point -= 1
+        base_index += 1
+
+    print(length_of_longest_pali, longest_pali_start_position, base_string[longest_pali_start_position:longest_pali_start_position+length_of_longest_pali+1])
+
+
+def is_palindrome(base_string, start_index, end_index):
+    half_way = int((end_index - start_index) / 2) + start_index + 1
+    for index in range(start_index, half_way):
+        if not base_string[index] == base_string[end_index]:
+            return False
+        end_index -= 1
+    return True
+
+
+def run_algorithms():
+    #random_string = random_string_of_size(1000000)
+    #starting_time = time()
+    #print_trimmed_string(random_string)
+    #time_ellapsed = time() - starting_time
+    #print("trimmed_string: ", time_ellapsed)
+
+    #random_numbers = random_int_list_of_size(1000000)
+    #starting_time = time()
+    #print_n_biggest_numbers(random_numbers)
+    #time_ellapsed = time() - starting_time
+    #print("biggest numbers: ",time_ellapsed)
+
+    random_binary_string = random_binary_string_of_size(1000)
     starting_time = time()
-    print_n_biggest_numbers(random_numbers)
+    #"0100100110"
+    print_longest_palindrome(random_binary_string)
     time_ellapsed = time() - starting_time
-    print("biggest numbers: ",time_ellapsed)
+    print("polindromes: ",time_ellapsed)
     
 
 
