@@ -1,7 +1,7 @@
 from maze import Maze
 from position import Position
 from graph import Graph
-from bfs_maze import BFS_search
+from bfs_search import BFS_search
 
 def main():
     # 1 = wall, 0 = empty

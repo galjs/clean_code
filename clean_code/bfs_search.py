@@ -16,8 +16,6 @@ class BFS_search():
         self._map_best_route()
         best_route = self._create_best_route()
         positions = self._graph.convert_junctions_to_positions(best_route)
-        if len(positions) == 0:
-            raise BoardIntegrityError("no solution!")
         return positions
 
     def _map_best_route(self):
@@ -46,20 +44,21 @@ class BFS_search():
                     neighbour.set_discovered(sequence_number)
                     sequence_number += 1
 
+        raise BoardIntegrityError("no solution!")
+
     def _create_best_route(self):
         best_route = []
-        if self._finish_junction.is_discovered():
-            current_junction = self._finish_junction
+        current_junction = self._finish_junction
         
-            best_route.append(current_junction)
+        best_route.append(current_junction)
 
-            while not current_junction.is_start():
-                next_junction = self._get_smallest_sequence_number_neighbour(current_junction)
-                best_route.append(next_junction)
-                current_junction = next_junction
+        while not current_junction.is_start():
+            next_junction = self._get_smallest_sequence_number_neighbour(current_junction)
+            best_route.append(next_junction)
+            current_junction = next_junction
 
         return best_route
 
     def _get_smallest_sequence_number_neighbour(self, current_junction):
-        visited_junctions = filter(lambda connection: not connection.get_sequence_number() == -1, current_junction.get_connections())
+        visited_junctions = filter(lambda connection: connection.is_discovered(), current_junction.get_connections())
         return min(visited_junctions, key=lambda junction: junction.get_sequence_number())
