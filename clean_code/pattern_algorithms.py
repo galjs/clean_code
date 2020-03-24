@@ -99,20 +99,20 @@ def even_palindrome_length(base_string, middle_left, middle_right):
 
 def print_permutations(base_string):
     elements = list(base_string)
-    limit = factorial(len(elements))
-    indexes = [0]*len(elements)
+    number_of_permutations = factorial(len(elements))
+    element_indexes = [0]*len(elements)
     permutations = []
     possible_permutations_with_repetition = len(elements) ** len(elements)
     possible_permutations_with_repetition -= (possible_permutations_with_repetition / len(elements))
 
-    for permutation in range(limit):
+    for permutation in range(number_of_permutations):
         permutations.append([])
-        while not is_unique(indexes):
-            increase_indexes(indexes, len(elements) - 1)
+        while not is_unique(element_indexes):
+            increase_indexes(element_indexes, len(elements)-1)
 
-        for index in indexes:
+        for index in element_indexes:
             permutations[permutation].append(elements[index])
-        increase_indexes(indexes, len(elements)-1)
+        increase_indexes(element_indexes, len(elements)-1)
 
     for permutation in permutations:
         print(''.join(permutation))
@@ -120,25 +120,25 @@ def print_permutations(base_string):
 
 
 def is_unique(indexes):
-    occurences = Counter(indexes)
-    for times in occurences.values():
-        if times > 1:
+    occurences_of_each_value = Counter(indexes)
+    for occurences in occurences_of_each_value.values():
+        if occurences > 1:
             return False
     return True
 
 
-def increase_indexes(indexes, max_index_value):
+def increase_indexes(indexes, max_value):
     current_index = 0
     indexes[current_index] += 1
-    if indexes[current_index] <= max_index_value:
+    if indexes[current_index] <= max_value:
         return
 
-    while current_index < len(indexes) - 1 and indexes[current_index] > max_index_value:
+    while current_index < len(indexes) - 1 and indexes[current_index] > max_value:
         indexes[current_index] = 0
         current_index += 1
         indexes[current_index] += 1
 
-    if indexes[-1] > max_index_value:
+    if indexes[-1] > max_value:
         raise IndexError("index out of range")
 
 
