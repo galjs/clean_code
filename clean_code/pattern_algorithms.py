@@ -142,6 +142,30 @@ def increase_indexes(indexes, max_value):
         raise IndexError("index out of range")
 
 
+def print_permutations_recursively(base_string):
+    return list(generate_permutations_recursively(list(base_string)))
+
+def generate_permutations_recursively(elements):
+    permutations = []
+    if len(elements) == 1:
+        return [elements[0]]
+
+    for index in range(len(elements)):
+        current_run = list(elements)
+        switch_positions(current_run, 0, index)
+        for combination in generate_permutations_recursively(current_run[1:]):
+            complete = current_run[0] + ''.join(combination)
+            permutations.append(complete)
+
+    return permutations
+
+
+def switch_positions(elements, first, second):
+    value_keeper = elements[first]
+    elements[first] = elements[second]
+    elements[second] = value_keeper
+
+
 def run_algorithms():
     #random_string = random_string_of_size(1000000)
     #starting_time = time()
@@ -161,11 +185,11 @@ def run_algorithms():
     #time_ellapsed = time() - starting_time
     #print("palindromes: ",time_ellapsed)
 
-    random_string = random_string_of_size(6)
+    random_string = random_string_of_size(7)
     starting_time = time()
-    print_permutations(random_string)
+    print_permutations_recursively(random_string)
     time_ellapsed = time() - starting_time
-    print("permutations: ",time_ellapsed)
+    print("recursive permutations: ",time_ellapsed)
     
 
 
