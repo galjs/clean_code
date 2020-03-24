@@ -52,21 +52,21 @@ class Maze():
         return cells
 
     def _validate_maze_is_legal(self):
-        first_row = self._check_row_consistancy(0, True)
-        last_row = self._check_row_consistancy(self._rows - 1, True)
-        left_column = self._check_column_consistancy(0, True)
-        right_column = self._check_column_consistancy(self._columns - 1, True)
+        first_row = self._check_row_consistancy(0)
+        last_row = self._check_row_consistancy(self._rows - 1)
+        left_column = self._check_column_consistancy(0)
+        right_column = self._check_column_consistancy(self._columns - 1)
 
         if not(first_row and last_row and left_column and right_column):
             raise BoardIntegrityError("not all borders are blocked")
 
 
-    def _check_row_consistancy(self, row, desired_state):
+    def _check_row_consistancy(self, row):
         return reduce(lambda x, y: x and y, map(lambda cell: cell.is_blocked(), self._board[row]))
 
 
 
-    def _check_column_consistancy(self, column, desired_state):
+    def _check_column_consistancy(self, column):
         return reduce(lambda x, y: x and y, map(lambda row: row[column].is_blocked(), self._board))
 
     def mark_cells_at_positions(self, positions):

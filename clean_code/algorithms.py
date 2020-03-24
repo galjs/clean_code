@@ -110,7 +110,6 @@ def run_algorithms():
 
     random_binary_string = random_binary_string_of_size(1000000)
     starting_time = time()
-    #"0100100110"
     print_longest_palindrome(random_binary_string)
     time_ellapsed = time() - starting_time
     print("palindromes: ",time_ellapsed)

@@ -26,15 +26,14 @@ class Graph():
                 else:
                     current_junction = Junction(Position(row, column))
                     self._graph[row].append(current_junction)
-                    #self._update_junctions(current_junction)
-
-
 
     def _update_junctions(self):
         junctions = filter(None, [node for row in self._graph for node in row])
         for junction in junctions:
             position = junction.get_position()
 
+            # by only connecting two at a time, no duplicate calls to
+            # get_junction_relative_to_position are made
             upper_junction = self._get_junction_relative_to_position(position, -1, 0)
             left_junction = self._get_junction_relative_to_position(position, 0, -1)
 

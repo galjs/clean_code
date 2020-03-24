@@ -26,7 +26,6 @@ class BFS_search():
         nodes = [self._start_junction]
 
         self._start_junction.set_discovered(sequence_number)
-        sequence_number += 1
 
         while not len(nodes) == 0:
             current_junction = nodes[0]
@@ -36,14 +35,16 @@ class BFS_search():
             for neighbour in neighbours:
                 if neighbour.is_finish():
                     neighbour.set_discovered(sequence_number)
-                    sequence_number += 1
                     return
 
                 if not neighbour.is_discovered():
                     nodes.append(neighbour)
-                    neighbour.set_discovered(sequence_number)
                     sequence_number += 1
+                    neighbour.set_discovered(sequence_number)
+                    
 
+        # if the algorithm checked all nodes without finding the finish node
+        # it means there is no solution
         raise BoardIntegrityError("no solution!")
 
     def _create_best_route(self):
