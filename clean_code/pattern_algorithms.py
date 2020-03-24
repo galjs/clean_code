@@ -1,6 +1,8 @@
 from random import choice, randint, shuffle
 from string import digits
 from time import time
+from collections import Counter
+from math import factorial
 
 
 def random_string_of_size(n):
@@ -95,6 +97,51 @@ def even_palindrome_length(base_string, middle_left, middle_right):
     return length
 
 
+def print_permutations(base_string):
+    elements = list(base_string)
+    limit = factorial(len(elements))
+    indexes = [0]*len(elements)
+    permutations = []
+    possible_permutations_with_repetition = len(elements) ** len(elements)
+    possible_permutations_with_repetition -= (possible_permutations_with_repetition / len(elements))
+
+    for permutation in range(limit):
+        permutations.append([])
+        while not is_unique(indexes):
+            increase_indexes(indexes, len(elements) - 1)
+
+        for index in indexes:
+            permutations[permutation].append(elements[index])
+        increase_indexes(indexes, len(elements)-1)
+
+    for permutation in permutations:
+        print(''.join(permutation))
+
+
+
+def is_unique(indexes):
+    occurences = Counter(indexes)
+    for times in occurences.values():
+        if times > 1:
+            return False
+    return True
+
+
+def increase_indexes(indexes, max_index_value):
+    current_index = 0
+    indexes[current_index] += 1
+    if indexes[current_index] <= max_index_value:
+        return
+
+    while current_index < len(indexes) - 1 and indexes[current_index] > max_index_value:
+        indexes[current_index] = 0
+        current_index += 1
+        indexes[current_index] += 1
+
+    if indexes[-1] > max_index_value:
+        raise IndexError("index out of range")
+
+
 def run_algorithms():
     #random_string = random_string_of_size(1000000)
     #starting_time = time()
@@ -108,11 +155,17 @@ def run_algorithms():
     #time_ellapsed = time() - starting_time
     #print("biggest numbers: ",time_ellapsed)
 
-    random_binary_string = random_binary_string_of_size(1000000)
+    #random_binary_string = random_binary_string_of_size(1000000)
+    #starting_time = time()
+    #print_longest_palindrome(random_binary_string)
+    #time_ellapsed = time() - starting_time
+    #print("palindromes: ",time_ellapsed)
+
+    random_string = random_string_of_size(6)
     starting_time = time()
-    print_longest_palindrome(random_binary_string)
+    print_permutations(random_string)
     time_ellapsed = time() - starting_time
-    print("palindromes: ",time_ellapsed)
+    print("permutations: ",time_ellapsed)
     
 
 
