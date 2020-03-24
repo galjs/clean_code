@@ -3,6 +3,7 @@ from string import digits
 from time import time
 from collections import Counter
 from math import factorial
+from bisect import insort
 
 
 def random_string_of_size(n):
@@ -29,19 +30,11 @@ def print_n_biggest_numbers(numbers, amount=20):
 
 
     for number in numbers:
-        if number > biggest_numbers[-1]:
-            add_number_to_sorted_list(biggest_numbers, number)
-            del biggest_numbers[-1]
+        if number > biggest_numbers[0]:
+            insort(biggest_numbers, number)
+            del biggest_numbers[0]
 
     print(biggest_numbers)
-
-
-def add_number_to_sorted_list(numbers, number):
-    for index in range(len(numbers)):
-        if number > numbers[index]:
-            numbers.insert(index, number)
-            return
-    numbers.append(number)
 
 
 def print_trimmed_string(base_string):
@@ -143,7 +136,8 @@ def increase_indexes(indexes, max_value):
 
 
 def print_permutations_recursively(base_string):
-    return list(generate_permutations_recursively(list(base_string)))
+    print(list(generate_permutations_recursively(list(base_string))))
+
 
 def generate_permutations_recursively(elements):
     permutations = []
@@ -152,18 +146,12 @@ def generate_permutations_recursively(elements):
 
     for index in range(len(elements)):
         current_run = list(elements)
-        switch_positions(current_run, 0, index)
+        current_run[0], current_run[index] = current_run[index], current_run[0]
         for combination in generate_permutations_recursively(current_run[1:]):
             complete = current_run[0] + ''.join(combination)
             permutations.append(complete)
 
     return permutations
-
-
-def switch_positions(elements, first, second):
-    value_keeper = elements[first]
-    elements[first] = elements[second]
-    elements[second] = value_keeper
 
 
 def run_algorithms():

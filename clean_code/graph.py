@@ -56,10 +56,7 @@ class Graph():
         display = ""
         for row in self._graph:
             for node in row:
-                if node is not None:
-                    display += str(node)
-                else:
-                    display += '   '
+                display += str(node) if node else ' '
             display += '\n'
         return display
 
