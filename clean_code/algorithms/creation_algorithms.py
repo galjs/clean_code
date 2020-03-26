@@ -28,8 +28,12 @@ def generate_permutations_iterably(elements):
 
         for permutation in permutations_copy:
             new_combinations = _first_cell_permutations(permutation)
-            final_set.update(new_combinations[1:])
+            # the first permutation is the same as "permutation", so there
+            # is no need to add it again
+
             permutations.update(new_combinations[1:])
+
+        final_set.update(permutations)
 
     return final_set
 

@@ -26,9 +26,10 @@ def find_longest_palindrome(base_string):
     for index in range(len(base_string) - 1):
         for check_even in [True, False]:
             current_length = _palindrome_length(base_string, index, check_even)
-            if current_length > longest_length:
-                longest_length = current_length
-                start_index = index
+            #if current_length > longest_length:
+            #    longest_length = current_length
+            #    start_index = index
+            longest_length, start_index = max((longest_length, start_index), (current_length, index))
     
     
     return _rebuild_palindrome(base_string, start_index, longest_length)
@@ -48,7 +49,7 @@ def _palindrome_length(base_string, middle, check_even):
 
     if not check_even:
         return (distance_from_middle * 2) - 1
-    return (distance_from_middle * 2) - 1
+    return (distance_from_middle * 2)
 
 
 def _rebuild_palindrome(base_string, start_index, length):
