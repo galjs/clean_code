@@ -6,11 +6,9 @@ from bisect import insort
 
 def find_n_biggest_numbers(numbers, amount=20):
     """return the nth biggest elements in the list"""
-    if len(numbers) > amount:
-        biggest_numbers = sorted(numbers[:amount])
-    else:
+    if len(numbers) <= amount:
         return numbers
-
+    biggest_numbers = sorted(numbers[:amount])
 
     for number in numbers:
         if number > biggest_numbers[0]:
@@ -26,35 +24,31 @@ def find_longest_palindrome(base_string):
     start_index = 0
 
     for index in range(len(base_string) - 1):
-        check_even = False
-        for _ in range(2):
+        for check_even in [True, False]:
             current_length = _palindrome_length(base_string, index, check_even)
             if current_length > longest_length:
                 longest_length = current_length
                 start_index = index
-            check_even = not check_even
     
     
     return _rebuild_palindrome(base_string, start_index, longest_length)
 
 
-def _palindrome_length(base_string, middle, check_even=False):
-    function_offset = 0
-    if check_even:
-        function_offset = 1
+def _palindrome_length(base_string, middle, check_even):
+    function_offset = 1 if check_even else 0
 
     distance_from_middle = 1
-    right = distance_from_middle + middle + function_offset
-    left = middle - distance_from_middle
+    right_end = distance_from_middle + middle + function_offset
+    left_end = middle - distance_from_middle
 
-    while right < len(base_string) and left >= 0 and base_string[right] == base_string[left]:
+    while right_end < len(base_string) and left_end >= 0 and base_string[right_end] == base_string[left_end]:
         distance_from_middle += 1
-        right = distance_from_middle + middle + function_offset
-        left = middle - distance_from_middle
+        right_end = distance_from_middle + middle + function_offset
+        left_end = middle - distance_from_middle
 
     if not check_even:
         return (distance_from_middle * 2) - 1
-    return (distance_from_middle * 2) - 1 + function_offset
+    return (distance_from_middle * 2) - 1
 
 
 def _rebuild_palindrome(base_string, start_index, length):

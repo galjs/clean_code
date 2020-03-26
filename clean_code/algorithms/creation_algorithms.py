@@ -22,14 +22,14 @@ def generate_permutations_iterably(elements):
     new_combinations = _first_cell_permutations(elements)
     permutations.update(new_combinations)
 
-    while len(permutations) < expectd_permutations_number:
+    while len(final_set) < expectd_permutations_number:
         permutations_copy = permutations.copy()
         permutations = set()
 
         for permutation in permutations_copy:
             new_combinations = _first_cell_permutations(permutation)
-            final_set.update(new_combinations)
-            permutations.update(new_combinations)
+            final_set.update(new_combinations[1:])
+            permutations.update(new_combinations[1:])
 
     return final_set
 
@@ -37,9 +37,9 @@ def generate_permutations_iterably(elements):
 def _first_cell_permutations(base_state):
     new_permutations = []
     for index in range(len(base_state)):
-        base_state_copy = list(base_state)
-        _switch_cells(base_state_copy, 0, index)
-        new_permutations.append(''.join(base_state_copy))
+        splitted_base_state = list(base_state)
+        _switch_cells(splitted_base_state, 0, index)
+        new_permutations.append(''.join(splitted_base_state))
 
     return new_permutations
 
